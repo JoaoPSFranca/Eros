@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="11fb4ca7-8235-4c0b-bd3b-78d76924f0fb" name="Changes" comment="Primeiro Commit">
       <changelist_data name="JoaoPSFranca" email="" />
+      <change afterPath="$PROJECT_DIR$/Funcionalidades/Cohere.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Funcionalidades/Wit_ai.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Funcionalidades/AbrirApps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Funcionalidades/AbrirApps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Funcionalidades/OuvirComando.py" beforeDir="false" afterPath="$PROJECT_DIR$/Funcionalidades/OuvirComando.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +106,8 @@
       <workItem from="1727811952390" duration="629000" />
       <workItem from="1727812599206" duration="4762000" />
       <workItem from="1727824514939" duration="2189000" />
+      <workItem from="1727976721655" duration="3234000" />
+      <workItem from="1728112489343" duration="3639000" />
     </task>
     <servers />
   </component>
@@ -125,6 +130,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Primeiro Commit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ErosProject$main.coverage" NAME="main Coverage Results" MODIFIED="1727824775980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ErosProject$main.coverage" NAME="main Coverage Results" MODIFIED="1728115404086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

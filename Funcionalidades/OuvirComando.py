@@ -5,11 +5,4 @@ def ouvir_comando():
     with sr.Microphone() as fonte:
         print("Diga algo:")
         audio = reconhecedor.listen(fonte)
-    try:
-        comando = reconhecedor.recognize_google(audio, language="pt-BR")
-        print("Você disse: " + comando)
-    except sr.UnknownValueError:
-        print("Não entendi o que você disse.")
-    except sr.RequestError:
-        print("Erro ao conectar-se ao serviço de reconhecimento de voz.")
-    return comando
+    return audio
