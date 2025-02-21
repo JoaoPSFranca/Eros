@@ -2,7 +2,6 @@ import os
 import subprocess
 import json
 import shutil
-from datetime import datetime
 import platform
 
 
