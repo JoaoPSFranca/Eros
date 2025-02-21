@@ -1,7 +1,7 @@
 from src.core import Assistant
 
 def main():
-    print("Iniciando Assistente Virtual...")
+    print('\033[36m' + "Iniciando Assistente Virtual..." + '\033[0;0m')
     assistant = Assistant()
     assistant.start()
 
