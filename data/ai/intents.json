@@ -1,0 +1,265 @@
+{
+    "intents": [
+        {
+            "tag": "saudacao",
+            "patterns": [
+                "oi", "olá", "e aí", "bom dia", "boa tarde", "boa noite",
+                "hey", "tudo bem?", "como vai?", "eae", "como você está"
+            ],
+            "responses": [
+                "Olá! Como posso ajudar?",
+                "Oi! Em que posso ser útil hoje?",
+                "Olá! O que você precisa?",
+                "Oi! Como posso te auxiliar?",
+                "Olá, estou aqui para ajudar! O que precisa?"
+            ]
+        },
+        {
+            "tag": "despedida",
+            "patterns": [
+                "tchau", "até mais", "até logo", "adeus", "até a próxima",
+                "tenho que ir", "vou sair", "encerrar", "finalizar"
+            ],
+            "responses": [
+                "Até logo!",
+                "Foi um prazer ajudar!",
+                "Volte sempre que precisar!",
+                "Até a próxima!",
+                "Tchau! Estou aqui quando precisar."
+            ]
+        },
+        {
+            "tag": "agradecimento",
+            "patterns": [
+                "obrigado", "obrigada", "valeu", "agradeço", "muito obrigado",
+                "grato", "grata", "thanks", "thank you"
+            ],
+            "responses": [
+                "Por nada!",
+                "Disponha!",
+                "É um prazer ajudar!",
+                "Fico feliz em poder ajudar!",
+                "Estou à disposição sempre que precisar."
+            ]
+        },
+        {
+            "tag": "ajuda",
+            "patterns": [
+                "me ajude", "preciso de ajuda", "pode me ajudar", "socorro",
+                "não sei o que fazer", "estou perdido", "como funciona", "instruções"
+            ],
+            "responses": [
+                "Claro, como posso ajudar?",
+                "Estou aqui para ajudar. O que você precisa?",
+                "Digite 'ajuda' para ver todos os comandos disponíveis.",
+                "Posso ajudar com várias tarefas. Digite 'ajuda' para ver a lista completa."
+            ]
+        },
+        {
+            "tag": "hora_atual",
+            "patterns": [
+                "que horas são", "hora atual", "me diga as horas", "horário",
+                "que horas temos", "hora", "horas"
+            ],
+            "responses": [
+                "Para verificar o horário atual, use o comando 'hora'.",
+                "Você pode verificar o horário atual com o comando 'hora'.",
+                "Use o comando 'hora' para que eu mostre o horário atual."
+            ]
+        },
+        {
+            "tag": "arquivos",
+            "patterns": [
+                "listar arquivos", "mostrar arquivos", "quais arquivos", "ver arquivos",
+                "arquivos da pasta", "conteúdo da pasta", "ls", "dir"
+            ],
+            "responses": [
+                "Para listar arquivos, use o comando 'ls' seguido do caminho (opcional).",
+                "Você pode ver os arquivos com o comando 'ls'.",
+                "Use 'ls' para listar os arquivos do diretório atual."
+            ]
+        },
+        {
+            "tag": "criar_pasta",
+            "patterns": [
+                "criar pasta", "nova pasta", "fazer diretório", "criar diretório",
+                "mkdir", "nova dir", "adicionar pasta"
+            ],
+            "responses": [
+                "Para criar uma pasta, use o comando 'mkdir' seguido do nome da pasta.",
+                "Você pode criar um novo diretório com 'mkdir nome_da_pasta'.",
+                "Use 'mkdir' para criar novas pastas."
+            ]
+        },
+        {
+            "tag": "mover_arquivo",
+            "patterns": [
+                "mover arquivo", "mover pasta", "transferir arquivo", "mudar local",
+                "mv", "mover para", "transferir para"
+            ],
+            "responses": [
+                "Para mover um arquivo, use o comando 'mv origem destino'.",
+                "Você pode mover arquivos com 'mv arquivo destino'.",
+                "Use 'mv' para transferir arquivos de um local para outro."
+            ]
+        },
+        {
+            "tag": "organizar_arquivos",
+            "patterns": [
+                "organizar arquivos", "organizar pasta", "ordenar arquivos", "classificar arquivos",
+                "arrumar arquivos", "limpar pasta", "arranjar arquivos"
+            ],
+            "responses": [
+                "Para organizar automaticamente seus arquivos, use o comando 'organizar'.",
+                "Você pode organizar os arquivos por tipo usando 'organizar'.",
+                "Use 'organizar' para classificar os arquivos em pastas por categoria."
+            ]
+        },
+        {
+            "tag": "criar_nota",
+            "patterns": [
+                "criar nota", "nova nota", "anotar", "fazer anotação", "salvar nota",
+                "guardar informação", "nota de texto"
+            ],
+            "responses": [
+                "Para criar uma nota, use o comando 'nota título conteúdo #tag'.",
+                "Você pode criar anotações com 'nota'.",
+                "Use 'nota' para salvar suas anotações e ideias."
+            ]
+        },
+        {
+            "tag": "pesquisar",
+            "patterns": [
+                "pesquisar na web", "buscar na internet", "google", "procurar online",
+                "buscar informação", "pesquisa", "procurar na web"
+            ],
+            "responses": [
+                "Para pesquisar na web, use o comando 'pesquisar termo'.",
+                "Você pode realizar buscas online com 'pesquisar'.",
+                "Use 'pesquisar' seguido do termo que deseja procurar na internet."
+            ]
+        },
+        {
+            "tag": "abrir_programa",
+            "patterns": [
+                "abrir programa", "executar programa", "iniciar aplicativo", "rodar programa",
+                "executar aplicação", "abrir app", "iniciar programa"
+            ],
+            "responses": [
+                "Para abrir um programa, use o comando 'abrir nome_do_programa'.",
+                "Você pode executar aplicativos com 'abrir'.",
+                "Use 'abrir' seguido do nome do programa que deseja iniciar."
+            ]
+        },
+        {
+            "tag": "criar_lembrete",
+            "patterns": [
+                "criar lembrete", "novo lembrete", "me lembre", "agendar", "marcar lembrete",
+                "não esquecer", "aviso", "alarme"
+            ],
+            "responses": [
+                "Para criar um lembrete, use 'lembrete data_hora mensagem'.",
+                "Você pode agendar lembretes com o comando 'lembrete'.",
+                "Use 'lembrete' seguido da data, hora e mensagem."
+            ]
+        },
+        {
+            "tag": "resumir_texto",
+            "patterns": [
+                "resumir texto", "fazer resumo", "sintetizar", "resumo", "condensar texto",
+                "abreviar texto", "sumarizar"
+            ],
+            "responses": [
+                "Para resumir um texto, use o comando 'resumir' seguido do texto.",
+                "Você pode condensar textos com 'resumir'.",
+                "Use 'resumir' para criar uma versão curta de qualquer texto."
+            ]
+        },
+        {
+            "tag": "sistema_info",
+            "patterns": [
+                "informações do sistema", "info sistema", "status sistema", "sistema",
+                "especificações", "hardware", "recursos"
+            ],
+            "responses": [
+                "Para verificar informações do sistema, use o comando 'sistema'.",
+                "Você pode ver detalhes do sistema com 'sistema'.",
+                "Use 'sistema' para obter informações sobre seu computador."
+            ]
+        },
+        {
+            "tag": "memoria_info",
+            "patterns": [
+                "uso de memória", "memória ram", "status memória", "ocupação memória",
+                "ram", "memória disponível", "memória livre"
+            ],
+            "responses": [
+                "Para verificar o uso de memória, use o comando 'memoria'.",
+                "Você pode monitorar a memória RAM com 'memoria'.",
+                "Use 'memoria' para ver quanto de RAM está sendo utilizada."
+            ]
+        },
+        {
+            "tag": "limpar_tela",
+            "patterns": [
+                "limpar tela", "limpar console", "clear", "cls", "limpar terminal",
+                "limpar prompt", "apagar tela"
+            ],
+            "responses": [
+                "Para limpar a tela, use o comando 'clear'.",
+                "Você pode limpar o console com 'clear'.",
+                "Use 'clear' para limpar toda a tela."
+            ]
+        },
+        {
+            "tag": "piada",
+            "patterns": [
+                "conte uma piada", "me faça rir", "piada", "algo engraçado", "uma anedota",
+                "me diga uma piada", "seja engraçado"
+            ],
+            "responses": [
+                "Por que o computador foi ao médico? Porque estava com vírus!",
+                "O que o zero disse para o oito? Belo cinto!",
+                "Qual é o contrário de volátil? Vem cá sobrinho!",
+                "Por que o livro de matemática ficou triste? Porque tinha muitos problemas.",
+                "O que o pato disse para a pata? Vem Quá!"
+            ]
+        },
+        {
+            "tag": "musica",
+            "patterns": [
+                "tocar música", "reproduzir música", "música", "player", "tocar canção",
+                "reproduzir áudio", "mp3", "playlist"
+            ],
+            "responses": [
+                "Para reproduzir músicas, você pode adicionar um atalho para seu player favorito usando 'atalho player caminho_do_programa'.",
+                "Você pode abrir seu player de música com 'abrir nome_do_player' após configurar o atalho.",
+                "Configure seu player de música com 'atalho' e use 'abrir' para executá-lo."
+            ]
+        },
+        {
+            "tag": "tempo",
+            "patterns": [
+                "qual o tempo", "previsão do tempo", "clima", "vai chover", "temperatura",
+                "como está o tempo", "previsão meteorológica"
+            ],
+            "responses": [
+                "Para obter informações sobre o clima, você pode usar 'pesquisar previsão do tempo'.",
+                "Use 'pesquisar clima' para verificar a previsão meteorológica.",
+                "Você pode verificar o tempo com 'pesquisar tempo em sua_cidade'."
+            ]
+        },
+        {
+            "tag": "calculadora",
+            "patterns": [
+                "calcular", "calculadora", "fazer conta", "operação matemática", "soma",
+                "subtração", "multiplicação", "divisão"
+            ],
+            "responses": [
+                "Você pode abrir a calculadora com 'abrir calculadora' após configurar o atalho.",
+                "Para cálculos, configure a calculadora com 'atalho calc caminho_da_calculadora' e use 'abrir calc'.",
+                "Configure sua calculadora favorita usando o comando 'atalho'."
+            ]
+        }
+    ]
+}

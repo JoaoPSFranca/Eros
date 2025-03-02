@@ -2,7 +2,9 @@ from datetime import datetime
 import re
 from src.automation_tools import AutomationTools
 from src.study_tools import StudyTools
-
+from src.ai_engine import AIEngine
+from src.learning_tools import LearningTools
+from src.nlp_tools import NLPTools
 
 class CommandHandler:
     def __init__(self, system_tools, web_tools, database):
@@ -11,11 +13,15 @@ class CommandHandler:
         self.database = database
         self.automation = AutomationTools()
         self.study_tools = StudyTools()
+        self.ai_engine = AIEngine()
+        self.nlp_tools = NLPTools()
+        self.learning_tools = LearningTools(self.ai_engine)
+
         self.commands = {
             "abrir": self.open_program,
             "ajuda": self.show_help,
             "atalho": self.add_shortcut,
-            "buscar_nota": self.list_notes(),
+            "buscar_nota": self.search_notes,
             "clear": self.system_tools.clear_screen,
             "historico": self.show_history,
             "hora": self.get_time,
@@ -26,13 +32,21 @@ class CommandHandler:
             "mkdir": self.create_folder,
             "mv": self.move_file,
             "nota": self.create_note,
-            "notas": self.search_notes,
+            "notas": self.list_notes,
             "organizar": self.organize_files,
             "pesquisar": self.web_search,
             "resumir": self.create_summary,
-            "sistema": self.system_tools.get_system_info
+            "sistema": self.system_tools.get_system_info,
+            # Comandos de NLP e IA
+            "sentimento": self.analyze_sentiment,
+            "entidades": self.extract_entities,
+            "treinar": self.train_ai,
+            "feedback": self.save_feedback,
+            "similaridade": self.check_similarity,
+            "stats": self.model_stats,
+            "aprender": self.apply_learning,
+            "analise": self.analyze_learning
         }
-
 
     def show_help(self, *args):
         return """
@@ -40,7 +54,7 @@ Comandos disponíveis:
 - abrir [programa]: Abre um programa
 - ajuda: Mostra esta mensagem
 - atalho [nome] [caminho]: Cria um atalho para um arquivo ou programa
-- buscar_nota [nome]: Busca um nota existente
+- buscar_nota [nome]: Busca uma nota existente
 - clear: Limpa a tela 
 - historico: Mostra histórico de comandos
 - hora: Mostra a hora atual
@@ -56,6 +70,17 @@ Comandos disponíveis:
 - pesquisar [termo]: Pesquisa na web
 - resumir [texto]: Resume um texto
 - sistema: Mostra informações do sistema
+
+Comandos de NLP e IA:
+- sentimento [texto]: Analisa o sentimento de um texto
+- entidades [texto]: Extrai entidades de um texto
+- treinar [tag] [padrões] [respostas]: Adiciona dados de treinamento à IA
+- feedback [pontuação] [resposta_melhor]: Fornece feedback sobre a última resposta
+- similaridade [texto1] [texto2]: Calcula a similaridade entre dois textos
+- stats: Exibe estatísticas do modelo de IA
+- aprender [max]: Aplica sugestões de aprendizado (opcional: número máximo)
+- analise: Analisa dados de aprendizado
+
 - sair: Encerra o assistente
 """
 
@@ -113,21 +138,6 @@ Comandos disponíveis:
         path = " ".join(args) if args else "."
         return self.automation.organize_files(path)
 
-    def process_command(self, command):
-        if not command:
-            return "Como posso ajudar?"
-
-        parts = command.split()
-        main_command = parts[0].lower()
-        args = parts[1:]
-
-        if main_command in self.commands:
-            return self.commands[main_command](*args)
-        elif "olá" in command or "oi" in command:
-            return f"Olá! Como posso ajudar? (digite 'ajuda' para ver os comandos disponíveis)"
-        else:
-            return "Comando não reconhecido. Digite 'ajuda' para ver os comandos disponíveis."
-
     def create_note(self, *args):
         if len(args) < 2:
             return "Use: nota [título] [conteúdo] #tag1 #tag2"
@@ -164,3 +174,149 @@ Comandos disponíveis:
             return "Por favor, forneça o texto para resumir."
         text = " ".join(args)
         return self.study_tools.create_summary(text)
+
+    def analyze_sentiment(self, *args):
+        if not args:
+            return "Por favor, forneça um texto para análise de sentimento."
+        text = " ".join(args)
+        sentiment = self.nlp_tools.analyze_sentiment(text)
+
+        emojis = {
+            "positivo": "😊",
+            "negativo": "😞",
+            "neutro": "😐"
+        }
+
+        return f"Sentimento: {sentiment} {emojis.get(sentiment, '')}"
+
+    def extract_entities(self, *args):
+        if not args:
+            return "Por favor, forneça um texto para extração de entidades."
+        text = " ".join(args)
+        entities = self.nlp_tools.extract_entities(text)
+
+        if not entities:
+            return "Nenhuma entidade encontrada no texto."
+
+        result = "Entidades encontradas:\n"
+        for entity_type, values in entities.items():
+            result += f"- {entity_type}: {', '.join(values)}\n"
+
+        return result
+
+    def check_similarity(self, *args):
+        if len(args) < 2:
+            return "Use: similaridade [texto1] [texto2]"
+
+        mid_point = len(args) // 2
+        text1 = " ".join(args[:mid_point])
+        text2 = " ".join(args[mid_point:])
+
+        similarity = self.nlp_tools.text_similarity(text1, text2)
+        percentage = similarity * 100
+
+        return f"Similaridade: {percentage:.2f}% entre os textos"
+
+    def train_ai(self, *args):
+        if len(args) < 3:
+            return "Use: treinar [tag] [padrões separados por vírgula] [respostas separadas por vírgula]"
+
+        tag = args[0]
+
+        full_args = " ".join(args[1:])
+        patterns_end = full_args.rfind(']')
+
+        if patterns_end == -1:
+            return "Formato inválido. Use: treinar [tag] [padrão1, padrão2] [resposta1, resposta2]"
+
+        patterns_str = full_args[:patterns_end + 1]
+        responses_str = full_args[patterns_end + 1:]
+
+        try:
+            patterns = [p.strip() for p in patterns_str.strip('[]').split(',')]
+            responses = [r.strip() for r in responses_str.strip('[]').split(',')]
+
+            if not patterns or not responses:
+                return "Padrões e respostas não podem estar vazios."
+
+            if self.ai_engine.add_training_data(tag, patterns, responses):
+                return f"IA treinada com sucesso! Adicionados {len(patterns)} padrões e {len(responses)} respostas para a tag '{tag}'."
+            else:
+                return "Erro ao treinar IA. Verifique o formato dos dados."
+        except Exception as e:
+            return f"Erro ao processar dados de treinamento: {e}"
+
+    def save_feedback(self, *args):
+        if not args:
+            return "Use: feedback [pontuação 1-5] [resposta_melhor]"
+
+        history = self.database.get_history()
+        if not history:
+            return "Nenhum histórico de conversa encontrado para dar feedback."
+
+        last_input = history[-1][1] if history else ""
+        last_output = "Resposta não registrada"
+
+        try:
+            score = int(args[0])
+            if score < 1 or score > 5:
+                return "A pontuação deve ser entre 1 e 5."
+
+            better_response = " ".join(args[1:]) if len(args) > 1 else None
+
+            self.learning_tools.save_feedback(last_input, last_output, score, better_response)
+
+            if score >= 4:
+                return "Obrigado pelo feedback positivo! 😊"
+            elif better_response:
+                return "Obrigado pelo feedback. Sua sugestão de resposta foi registrada e será considerada para melhorias futuras."
+            else:
+                return "Obrigado pelo feedback. Tentaremos melhorar nossas respostas."
+
+        except ValueError:
+            return "A pontuação deve ser um número entre 1 e 5."
+
+    def model_stats(self, *args):
+        return self.ai_engine.get_model_stats()
+
+    def apply_learning(self, *args):
+        max_suggestions = int(args[0]) if args and args[0].isdigit() else 5
+        return self.learning_tools.apply_suggested_intents(max_suggestions)
+
+    def analyze_learning(self, *args):
+        return self.learning_tools.analyze_learning_data()
+
+    def process_command(self, command):
+        if not command:
+            return "Como posso ajudar?"
+
+        self.database.add_to_history(datetime.now().isoformat(), command)
+
+        self.nlp_tools.update_context(command)
+
+        parts = command.split()
+        main_command = parts[0].lower()
+        args = parts[1:]
+
+        if main_command in self.commands:
+            response = self.commands[main_command](*args)
+
+            if response:
+                self.learning_tools.save_conversation(command, response)
+
+            return response
+
+        ai_response = self.ai_engine.get_response(command)
+        if ai_response:
+            self.learning_tools.save_conversation(command, ai_response)
+            return ai_response
+
+        for cmd_name in self.commands:
+            similarity = self.nlp_tools.text_similarity(command, cmd_name)
+            if similarity > 0.7:
+                suggested_cmd = f"Você quis dizer o comando '{cmd_name}'? Tente: '{cmd_name} {' '.join(args)}'"
+                return suggested_cmd
+
+        default_response = "Comando não reconhecido. Digite 'ajuda' para ver os comandos disponíveis."
+        self.learning_tools.save_conversation(command, default_response)
+        return default_response
