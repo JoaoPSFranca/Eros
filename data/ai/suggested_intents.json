@@ -1,0 +1,39 @@
+[
+    {
+        "suggested_tag": "auto_1",
+        "patterns": [
+            "cliam",
+            "news"
+        ],
+        "responses": [
+            "Comando não reconhecido. Digite 'ajuda' para ver os comandos disponíveis."
+        ],
+        "timestamp": "2025-03-02T12:19:37.876393",
+        "auto_detected": true
+    },
+    {
+        "suggested_tag": "auto_2",
+        "patterns": [
+            "noticia trump",
+            "noticia",
+            "noticia"
+        ],
+        "responses": [
+            "Erro ao obter notícias: Nenhuma notícia encontrada"
+        ],
+        "timestamp": "2025-03-02T12:26:41.959097",
+        "auto_detected": true
+    },
+    {
+        "suggested_tag": "auto_3",
+        "patterns": [
+            "noticia",
+            "noticia trump"
+        ],
+        "responses": [
+            "Erro ao obter notícias: Nenhuma notícia encontrada"
+        ],
+        "timestamp": "2025-03-02T12:27:47.448039",
+        "auto_detected": true
+    }
+]

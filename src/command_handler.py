@@ -1,5 +1,8 @@
 from datetime import datetime
 import re
+
+import requests
+
 from src.automation_tools import AutomationTools
 from src.study_tools import StudyTools
 from src.ai_engine import AIEngine
@@ -18,11 +21,13 @@ class CommandHandler:
         self.learning_tools = LearningTools(self.ai_engine)
 
         self.commands = {
-            "abrir": self.open_program,
+            "abrir": self.open_program_or_result,
             "ajuda": self.show_help,
             "atalho": self.add_shortcut,
+            "baixar": self.download_content,
             "buscar_nota": self.search_notes,
             "clear": self.system_tools.clear_screen,
+            "clima": self.get_weather,
             "historico": self.show_history,
             "hora": self.get_time,
             "lembrete": self.create_reminder,
@@ -33,9 +38,11 @@ class CommandHandler:
             "mv": self.move_file,
             "nota": self.create_note,
             "notas": self.list_notes,
+            "noticia": self.get_news,
             "organizar": self.organize_files,
             "pesquisar": self.web_search,
             "resumir": self.create_summary,
+            "resumir_url": self.summarize_url,
             "sistema": self.system_tools.get_system_info,
             # Comandos de NLP e IA
             "sentimento": self.analyze_sentiment,
@@ -104,9 +111,13 @@ Comandos de NLP e IA:
             result += f"{dt.strftime('%H:%M:%S')}: {input_text}\n"
         return result
 
-    def open_program(self, *args):
+    def open_program_or_result(self, *args):
         if not args:
-            return "Por favor, especifique o programa para abrir."
+            return "Por favor, especifique o programa para abrir ou o número do resultado."
+
+        if args[0].isdigit():
+            return self.web_tools.open_result(args[0])
+
         program_name = " ".join(args)
         return self.automation.open_program(program_name)
 
@@ -286,11 +297,84 @@ Comandos de NLP e IA:
     def analyze_learning(self, *args):
         return self.learning_tools.analyze_learning_data()
 
+    def summarize_url(self, *args):
+        if not args:
+            return "Por favor, forneça a URL para resumir."
+        url = args[0]
+        return self.web_tools.summarize_url(url)
+
+    def download_content(self, *args):
+        if len(args) < 2:
+            return "Uso: baixar [url] [nome_arquivo]"
+
+        url = args[0]
+        filename = args[1]
+
+        try:
+            import requests
+            response = requests.get(url, stream=True)
+            with open(filename, 'wb') as file:
+                for chunk in response.iter_content(chunk_size=8192):
+                    file.write(chunk)
+            return f"Arquivo baixado com sucesso: {filename}"
+        except Exception as e:
+            return f"Erro ao baixar arquivo: {e}"
+
+    def get_weather(self, *args):
+        if not args:
+            return "Por favor, especifique uma cidade para consulta de clima."
+
+        city = " ".join(args)
+        try:
+            api_key = "bbaad92c57b38b67517996eb56182b15"
+            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=pt_br"
+
+            response = requests.get(url)
+            data = response.json()
+
+            if response.status_code == 200:
+                temp = data['main']['temp']
+                desc = data['weather'][0]['description']
+                humidity = data['main']['humidity']
+                wind = data['wind']['speed']
+
+                return f"Clima em {city}:\n- Temperatura: {temp}°C\n- Condição: {desc}\n- Umidade: {humidity}%\n- Vento: {wind} m/s"
+            else:
+                return f"Erro ao obter clima: {data.get('message', 'Cidade não encontrada')}"
+        except Exception as e:
+            return f"Erro ao consultar clima: {e}"
+
+    def get_news(self, *args):
+        query = " ".join(args) if args else "brasil"
+
+        try:
+            api_key = "0e7eeb9c820f4910bac6ac25118e9dbe"
+
+            url = f"https://newsapi.org/v2/top-headlines?country=br&apiKey={api_key}"
+
+            response = requests.get(url)
+            data = response.json()
+
+            if response.status_code == 200 and data.get('articles'):
+                news_list = data['articles'][:5]
+
+                result = f"Notícias sobre '{query}':\n\n"
+                for i, news in enumerate(news_list, 1):
+                    result += f"{i}. {news['title']}\n"
+                    result += f"   Fonte: {news['source']['name']}\n"
+                    result += f"   Link: {news['url']}\n\n"
+
+                return result
+            else:
+                return f"Erro ao obter notícias: {data.get('message', 'Nenhuma notícia encontrada')}"
+        except Exception as e:
+            return f"Erro ao consultar notícias: {e}"
+
     def process_command(self, command):
         if not command:
             return "Como posso ajudar?"
 
-        self.database.add_to_history(datetime.now().isoformat(), command)
+        self.database.save_interaction(command, None)
 
         self.nlp_tools.update_context(command)
 
@@ -303,6 +387,7 @@ Comandos de NLP e IA:
 
             if response:
                 self.learning_tools.save_conversation(command, response)
+                self.database.save_interaction(command, response)
 
             return response
 
