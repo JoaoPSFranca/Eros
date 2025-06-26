@@ -1,3 +1,5 @@
+![Alt](https://repobeats.axiom.co/api/embed/48f394a39ddf5d02bcf27168c27eb58833f31209.svg "Repobeats analytics image")
+
 # Projeto Eros - Assistente Virtual
 
 Eros é um projeto pessoal de assistente virtual com foco em aprendizado de desenvolvimento de inteligência artificial. Este repositório documenta o progresso de cada etapa do projeto, desde a criação de uma interface de chat básica até o desenvolvimento de funcionalidades mais complexas.
