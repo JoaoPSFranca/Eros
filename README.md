@@ -50,7 +50,7 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 
 ---
 
-# Milestones (Etapas Gerais)
+# Milestones (Etapas do Desenvolvimento)
 
 ### Milestone 1: Estrutura Inicial do Projeto
 
@@ -58,6 +58,7 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 * [ ] Criar `main.py` com loop de entrada/saída
 * [ ] Criar classe `Assistant`
 
+<!--
 ### Milestone 2: Processamento de Linguagem Natural
 
 * [ ] Criar `intents.json` com exemplos simples
@@ -83,7 +84,7 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 * [ ] Modularizar completamente o projeto
 * [ ] Reduzir dependências externas (API)
 * [ ] Preparar para modelos customizados
-
+-->
 ---
 
 > Este README será atualizado a cada fase do projeto com mais detalhes técnicos e avanços obtidos.
