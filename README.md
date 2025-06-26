@@ -43,7 +43,7 @@ eros/
 ## Como executar (versão inicial)
 
 ```bash
-python main.py
+python eros/main.py
 ```
 
 ## Licença
@@ -60,13 +60,14 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 * [x] Criar `main.py` com loop de entrada/saída
 * [x] Criar classe `Assistant`
 
-<!--
 ### Milestone 2: Processamento de Linguagem Natural
 
-* [ ] Criar `intents.json` com exemplos simples
-* [ ] Implementar lematização/tokenização
-* [ ] Treinar classificador básico com SVC
-* [ ] Adicionar respostas automáticas por intencão
+* [x] Criar `intents.json` com exemplos simples e variados
+* [x] Implementar lematização/tokenização com `TfidfVectorizer`
+* [x] Treinar classificador com `SVC`
+* [x] Adicionar respostas automáticas por intencão
+* [x] Implementar controle por confiança
+* [x] Integrar o classificador ao Assistant
 
 ### Milestone 3: Funções Utilitárias
 
@@ -75,6 +76,7 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 * [ ] Comando `ajuda`
 * [ ] Clima via API
 
+<!--
 ### Milestone 4: Memória e Aprendizado
 
 * [ ] Registro de histórico em banco de dados
@@ -87,6 +89,8 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 * [ ] Reduzir dependências externas (API)
 * [ ] Preparar para modelos customizados
 -->
+
 ---
 
 > Este README será atualizado a cada fase do projeto com mais detalhes técnicos e avanços obtidos.
+
