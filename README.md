@@ -54,9 +54,9 @@ Projeto com fins de estudo e sem fins lucrativos. Nenhuma restrição de uso at�
 
 ### Milestone 1: Estrutura Inicial do Projeto
 
-* [ ] Definir estrutura de pastas
-* [ ] Criar `main.py` com loop de entrada/saída
-* [ ] Criar classe `Assistant`
+* [x] Definir estrutura de pastas
+* [x] Criar `main.py` com loop de entrada/saída
+* [x] Criar classe `Assistant`
 
 <!--
 ### Milestone 2: Processamento de Linguagem Natural
